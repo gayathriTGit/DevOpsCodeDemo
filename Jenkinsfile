@@ -1,13 +1,13 @@
-
 pipeline{
     tools{
-       
-        maven 'mymaven'
+       maven 'MavenTool'
     }
-	agent any
-      stages{
-           stage('Checkout the code'){
-	    
+    
+    agent any
+    
+    stages{
+        stage('Checkout the code'){
+
                steps{
 		 echo 'cloning the repo'
                  git 'https://github.com/Sonal0409/DevOpsClassCodes.git'
