@@ -1,50 +1,36 @@
 pipeline{
-    tools{
-       maven 'MavenTool'
+   tools{
+        maven 'MavenTool'
     }
-    
-    agent any
-    
-    stages{
-        stage('Checkout the code'){
-
-               steps{
-		 echo 'cloning the repo'
-                 git 'https://github.com/Sonal0409/DevOpsClassCodes.git'
-              }
+   agent any
+   stages{
+       stage('Checkout the code'){
+          steps{
+	     echo 'cloning the repo'
+             git 'https://github.com/Sonal0409/DevOpsClassCodes.git'
           }
-          stage('Compile'){
-             
-              steps{
-                  echo 'complie the code again..'
-                  sh 'mvn compile'
-	      }
+       }
+       stage('Compile'){
+          steps{
+             echo 'complie the code again..'
+             sh 'mvn compile'
+	  }
+       }
+       stage('CodeReview'){
+	  steps{
+	     echo 'codeReview'
+             sh 'mvn pmd:pmd'
           }
-          stage('CodeReview'){
-		  
-              steps{
-		    
-		  echo 'codeReview'
-                  sh 'mvn pmd:pmd'
-              }
+       }
+       stage('UnitTest'){
+	  steps{
+	     sh 'mvn test'
           }
-           stage('UnitTest'){
-		  
-              steps{
-	         
-                  sh 'mvn test'
-              }
-          
+       }
+       stage('Package'){
+	  steps{
+	     sh 'mvn package'
           }
-        
-          stage('Package'){
-		  
-              steps{
-		  
-                  sh 'mvn package'
-              }
-          }
-	     
-          
-      }
+       }
+    }
 }
