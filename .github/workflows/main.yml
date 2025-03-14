@@ -29,4 +29,14 @@ jobs:
         scp: |
          './target/*.war' => /var/lib/tomcat9/webapps
         last_ssh: |
-          sudo systemctl restart tomcat9
+          sudo systemctl restart tomcat
+    - name: Connect to Lab machine and trigger a Jenkins job 
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      with:
+        host: '43.205.243.131'
+        user: 'labuser'
+        pass: ${{secrets.LAB_PASSWORD}}
+        port: 22
+        connect_timeout: 10s
+        first_ssh: |
+          curl -l -u admin:Root123$ http://localhost:8080/job/DeployToTomcat/build?token=token1  
