@@ -29,7 +29,7 @@ jobs:
         scp: |
          './target/*.war' => /var/lib/tomcat9/webapps
         last_ssh: |
-          sudo systemctl restart tomcat
+          sudo systemctl restart tomcat9
     - name: Connect to Lab machine and trigger a Jenkins job 
       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
       with:
